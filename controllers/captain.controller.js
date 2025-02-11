@@ -12,7 +12,7 @@ module.exports.createRider = async (req, res) => {
 
     const { fullname, email, password, vechile } = req.body;
 
-    const isCaptainAlreadyExist = await captainModel.find({ email });
+    const isCaptainAlreadyExist = await captainModel.findOne({ email });
 
     if (!isCaptainAlreadyExist) {
         return res.status(500).json({message:"Capatain is already exist"})
