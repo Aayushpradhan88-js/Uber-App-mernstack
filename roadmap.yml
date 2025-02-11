@@ -1,0 +1,18 @@
+usermodel
+ -- fullname
+    --firstname
+    --lastname
+
+  --email
+  --password
+  --socketId
+
+ -------------
+ bcrypt & jwt -- Authentication
+
+
+/register
+/login
+/profile
+/logout
+
