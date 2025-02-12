@@ -21,14 +21,14 @@ const captainSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        Selection: false
+        Select: false
     },
     socketId: {
         type: String
     },
     status: {
         type: String,
-        enum: [active, inactive],
+        enum: ['active', 'inactive'],
         default: 'inactive',
     },
 
@@ -74,7 +74,7 @@ captainSchema.method.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 
-captatinSchema.statics.hashPassword = async function (password) {
+captainSchema.statics.hashPassword = async function (password) {
     return await bcrypt.hash(password, 10)
 }
 
