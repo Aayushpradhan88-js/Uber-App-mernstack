@@ -16,6 +16,6 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 app.use('/users', userRoutes);
-app.use('/captains', captainRoutes);
+app.use('/captain', captainRoutes);
 
 module.exports = app;
