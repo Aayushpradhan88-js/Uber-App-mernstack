@@ -21,7 +21,7 @@ const captainSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        Select: false
+        select: false
     },
     socketId: {
         type: String
@@ -32,7 +32,7 @@ const captainSchema = new mongoose.Schema({
         default: 'inactive',
     },
 
-    vechile: {
+    vehicle: {
         color: {
             type: String,
             required: true,
@@ -55,7 +55,7 @@ const captainSchema = new mongoose.Schema({
         }
     },
 
-    loaction: {
+    location: {
         ltd: {
             type: Number,
         },
@@ -70,7 +70,7 @@ captainSchema.methods.generateAuthToken = function () {
     return token;
 }
 
-captainSchema.method.comparePassword = async function (password) {
+captainSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 

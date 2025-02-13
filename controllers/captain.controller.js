@@ -2,7 +2,6 @@ const captainModel = require('../models/user.models')
 const { validationResult } = require('express-validator');
 const captainService = require('../services/captain.service');
 
-
 module.exports.registerCaptain = async (req, res, next) => {
 
     const errors = validationResult(req);
@@ -18,9 +17,7 @@ module.exports.registerCaptain = async (req, res, next) => {
         return res.status(400).json({ message: 'Captain already exist' });
     }
 
-
     const hashedPassword = await captainModel.hashPassword(password);
-
     const captain = await captainService.createCaptain({
         firstname: fullname.firstname,
         lastname: fullname.lastname,
@@ -33,9 +30,7 @@ module.exports.registerCaptain = async (req, res, next) => {
     });
 
     const token = captain.generateAuthToken();
-
     res.status(201).json({ token, captain });
-
 }
 
 //login captain
@@ -43,7 +38,7 @@ module.exports.loginCaptain = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.status(401).json({
-            errors: errors.array()
+            error: errors.array()
         })
     }
 
@@ -79,3 +74,4 @@ module.exports.loginCaptain = async (req, res, next) => {
 module.exports.getCaptainProfile = async (req, res) => {
     res.status(200).json({captain: req.captain})
 }
+
