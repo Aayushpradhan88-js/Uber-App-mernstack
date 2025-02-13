@@ -1,6 +1,7 @@
 const captainModel = require('../models/user.models')
 const { validationResult } = require('express-validator');
 const captainService = require('../services/captain.service');
+const blacklistToken = require('../models/blacklist.models')
 
 module.exports.registerCaptain = async (req, res, next) => {
 
@@ -34,44 +35,52 @@ module.exports.registerCaptain = async (req, res, next) => {
 }
 
 //login captain
-module.exports.loginCaptain = async (req, res, next) => {
+module.exports.loginCaptain = async (req, res, next) => { 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.status(401).json({
-            error: errors.array()
-        })
+        return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body
+    const { email, password } = req.body;
 
-    if (!email || !password) {
-        res.status(400).json({
-            message: "Email or password is required"
-        })
+    // Find the captain and explicitly select the password
+    const captain = await captainModel.findOne({ email }).select("+password");
+
+    if (!captain) {
+        return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const isEmail = await captainModel.findOne({ email });
-    if (!isEmail) {
-        res.status(401).json({
-            message: "Invalid email or password"
-        })
+    // Compare provided password with the hashed password
+    const isMatch = await captain.comparePassword(password);
+
+    if (!isMatch) {
+        return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const isPasswordValid = await captainModel.comparePassword(password);
-    if (!isPasswordValid) {
-        res.status(401).json({
-            message: "Invalid email or password"
-        })
-    }
+    // Generate JWT token
+    const token = captain.generateAuthToken();
 
-    const token = captainModel.generateAuthToken();
-    res.cookie("token", token);
-    res.status(201).json({
-        token, isEmail
-    })
+    // Set the token in cookies (optional)
+    res.cookie('token', token, { httpOnly: true });
+
+    res.status(200).json({ token, captain });
+};
+
+//user profile
+module.exports.getCaptainProfile = async (req, res) => {
+    res.status(200).json({ captain: req.captain })
 }
 
-module.exports.getCaptainProfile = async (req, res) => {
-    res.status(200).json({captain: req.captain})
+//logout
+module.exports.logout= async(req, res) => {
+    const token = req.cookies.token || (req.headers.authorization && req.headers.authorization.split(' ')[1])
+
+    await blacklistToken.create({token})
+
+    res.clearCookie('token');
+
+    res.status(201).json({
+        message: 'Youre successfully loggedout'
+    })
 }
 
