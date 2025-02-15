@@ -79,7 +79,7 @@ const UserLogin = () => {
       </div>
 
       <div>
-        <button className='bg-green-500 font-semibold mb-7 px-4 py-2 border w-full text-lg placeholder:text rounded-lg'>Sign in as Captain</button>
+        <Link to='/captain-login' className='bg-green-500 font-semibold mb-7 px-4 py-2 border w-full text-lg placeholder:text rounded-lg'>Sign in as Captain</Link>
       </div>
     </div>
   )
