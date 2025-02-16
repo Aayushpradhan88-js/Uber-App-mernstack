@@ -4,84 +4,88 @@ import { Link } from 'react-router-dom';
 
 const CaptainLogin = () => {
 
-   const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [userData, setUserData] = useState({});
-  
-    function submitHandler(e) {
-      e.preventDefault(); //To stop the output of the browser
-      setUserData({
-        email: email,
-        password: password
-      })
-      setEmail('')
-      setPassword('')
-    }
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [userData, setUserData] = useState({});
+
+  function submitHandler(e) {
+    e.preventDefault(); //To stop the output of the browser
+    setUserData({
+      email: email,
+      password: password
+    })
+    setEmail('')
+    setPassword('')
+  }
   return (
     <div>
       <div className='p-7 h-screen flex flex-col justify-between'>
-      <div>
-        {/* uber logo */}
-        <img className='w-16 mb-10' src="https://th.bing.com/th/id/OIP.9bm6M6gfXxYJ6qqjNR9B9AAAAA?w=280&h=280&rs=1&pid=ImgDetMain" alt="" />
+        <div>
+          {/* uber logo */}
+          <img className='w-30 mb-10' src="https://static.vecteezy.com/system/resources/previews/027/127/451/large_2x/uber-logo-uber-icon-transparent-free-png.png" alt="" style={{ filter: 'brightness(0) invert(1)' }}/>
 
-        {/* Form  */}
-        <form onSubmit={(e) => {
-          submitHandler(e);
-        }}>
-          {/* email box */}
-          <h3 className='text-xl font-medium mb-2'>
-            What is Your Email
-          </h3>
+          {/* Form  */}
+          <form onSubmit={(e) => {
+            submitHandler(e);
+          }}>
 
-          <input
-            required
-            // twoway binding 
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            className='bg-[#eeeeee] mb-7 px-4 py-2 border w-full text-lg placeholder:text rounded-lg'
-            type="email"
-            placeholder='email@example.com'
-          />
 
-          {/* password box */}
-          <h3 className='text-xl font-medium mb-2'>
-            Enter Password
-          </h3>
+            <h2 className='text-3xl underline font-semibold mb-7 text-center '>Captain Login</h2>
+            {/* email box */}
+            <h3 className='text-base font-medium mb-2'>
+              Create your email
+            </h3>
 
-          <input
-            required
-            type="password"
-            // twoway binding 
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            className='bg-[#eeeeee] mb-7 px-4 py-2 border w-full text-lg placeholder:text rounded-lg'
-            placeholder='password'
-          />
+            <input
+              required
+              // twoway binding 
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              className='bg-[#eeeeee] text-black mb-5 px-4 py-2 border w-full text-lg placeholder:text-sm rounded-lg'
+              type="email"
+              placeholder='email@example.com'
+            />
 
-          {/* Login button */}
-          <button className='bg-[#111] font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'>
-            Login
-          </button>
+            {/* password box */}
+            <h3 className='text-base font-medium mb-2'>
+              Enter Password
+            </h3>
 
-        </form>
+            <input
+              required
+              type="password"
+              // twoway binding 
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              className='bg-[#eeeeee] mb-5 px-4 py-2 border w-full text-lg placeholder:text rounded-lg'
+              placeholder='password'
+            />
 
-        {/* redirected to new Account */}
-        <p className='text-center'>Join a fleet?
-          <Link to='/signup' className='text-blue-600'>
-          Register as a Captain
-          </Link>
-        </p>
+            {/* Login button */}
+            <button className='bg-[#111] font-semibold mb-1 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'>
+              Login
+            </button>
+
+          </form>
+
+          {/* redirected to new Account */}
+          <p className='text-center'>Join a fleet?
+            <Link to='/captain-signup' className='text-blue-600'>
+              create a new captain
+            </Link>
+          </p>
+        </div>
+
+        <div>
+          <Link to='/login' className='bg-[#10b461] flex items-center justify-center text-white font-semibold mb-5 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'>Sign in as User</Link>
+        </div>
+
       </div>
 
-      <div>
-        <Link to='/login' className='bg-[#10b461] flex items-center justify-center text-white font-semibold mb-5 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'>Sign in as User</Link>
-      </div>
-    </div>
-      
     </div>
   )
 }

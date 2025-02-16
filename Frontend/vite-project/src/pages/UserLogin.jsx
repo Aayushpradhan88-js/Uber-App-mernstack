@@ -29,9 +29,11 @@ const UserLogin = () => {
         <form onSubmit={(e) => {
           submitHandler(e);
         }}>
+
+          <h2 className='text-4xl underline font-semibold mb-7 text-center '>User Login</h2>
           {/* email box */}
-          <h3 className='text-xl font-medium mb-2'>
-            What is Your Email
+          <h3 className='text-sm font-medium mb-2'>
+            Email
           </h3>
 
           <input
@@ -41,14 +43,14 @@ const UserLogin = () => {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
-            className='bg-[#eeeeee] mb-7 px-4 py-2 border w-full text-lg placeholder:text rounded-lg'
+            className='bg-[#eeeeee] mb-7 px-4 py-2 border w-full text-lg text-black placeholder:text-sm rounded-lg'
             type="email"
-            placeholder='email@example.com'
+            placeholder='enter your email'
           />
 
           {/* password box */}
-          <h3 className='text-xl font-medium mb-2'>
-            Enter Password
+          <h3 className='text-sm font-medium mb-2'>
+            Password
           </h3>
 
           <input
@@ -59,8 +61,8 @@ const UserLogin = () => {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            className='bg-[#eeeeee] mb-7 px-4 py-2 border w-full text-lg placeholder:text rounded-lg'
-            placeholder='password'
+            className='bg-[#eeeeee] mb-5 px-4 py-2 border w-full text-black text-lg placeholder:text-sm rounded-lg'
+            placeholder='enter your password'
           />
 
           {/* Login button */}
@@ -79,7 +81,7 @@ const UserLogin = () => {
       </div>
 
       <div>
-        <Link to='/captain-login' className='bg-green-500 font-semibold mb-7 px-4 py-2 border w-full text-lg placeholder:text rounded-lg'>Sign in as Captain</Link>
+        <Link to='/captain-signup' className='bg-[#10b461] flex items-center justify-center font-semibold mb-5 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'>Sign in as a captain</Link>
       </div>
     </div>
   )
