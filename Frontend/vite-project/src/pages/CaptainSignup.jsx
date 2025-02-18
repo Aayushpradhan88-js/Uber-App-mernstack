@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
-const CaptainLogin = () => {
+const CaptainSignup = () => {
 
   const [firstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
@@ -129,4 +129,4 @@ const CaptainLogin = () => {
   )
 }
 
-export default CaptainLogin
+export default CaptainSignup
