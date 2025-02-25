@@ -19,19 +19,19 @@ const UserLogin = () => {
   async function submitHandler(e) {
     e.preventDefault(); //To stop the output of the browser
 
-    const userData = {
-      email: email,
-      password: password
-    }
+    // const userData = {
+    //   email: email,
+    //   password: password
+    // }
 
-    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData)
+    // // const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData)
 
-    if (response.status === 200) {
-      const data = response.data
-      setUser(data.user)
-      localStorage.setItem('token', data.token);
-      navigate('/')
-    }
+    // if (response.status === 200) {
+    //   const data = response.data
+    //   setUser(data.user)
+    //   localStorage.setItem('token', data.token);
+    //   navigate('/')
+    // }
 
     setEmail('')
     setPassword('')

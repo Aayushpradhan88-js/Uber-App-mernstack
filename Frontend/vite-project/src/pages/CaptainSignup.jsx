@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { CaptainDataContext } from '../context/CaptainContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-const CaptainSignup = async() => {
+const CaptainSignup = () => {
 
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ const CaptainSignup = async() => {
 
   const [captain, setCaptain] = useContext(CaptainDataContext);
 
-  function submitHandler(e) {
+  const submitHandler = async(e) => {
     e.preventDefault(); //To stop the output of the browser
     const captainData = ({
       fullname: {
@@ -42,10 +42,10 @@ const CaptainSignup = async() => {
     if(response.status === 200){
       const data = response.data
       setCaptain(data.captain);
-      localStorage.setItem('token', setToken)
+      localStorage.setItem('token', token)
       navigate('/captain-home');
     }
-    
+
     // console.log(captainData)
     setFirstName('')
     setLastName('')

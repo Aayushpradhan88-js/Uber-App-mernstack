@@ -5,15 +5,15 @@ const blacklistModel = require('../models/blacklist.models')
 
 //register user
 module.exports.registerUser = async (req, res) => {
+    const error = validationResult(req)
+    if (!error.isEmpty()) {
+        return res.status(400).json({
+            error: error.array(),
+            message: "Invalid credintals"
+        })
+    }
+    
     try {
-        const error = validationResult(req)
-        if (!error.isEmpty()) {
-            return res.status(400).json({
-                error: error.array(),
-                message: "Invalid credintals"
-            })
-        }
-
         //creating user hashing password
         const { fullname, email, password } = req.body
 

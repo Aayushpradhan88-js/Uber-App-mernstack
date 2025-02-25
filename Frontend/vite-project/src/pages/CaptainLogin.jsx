@@ -1,34 +1,48 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { CaptainDataContext } from '../context/CaptainContext';
+import axios from 'axios';
+import { use } from 'react';
 
 const CaptainLogin = () => {
 
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userData, setUserData] = useState({});
+  const [captain, setCaptain] = useState('');
 
-  function submitHandler(e) {
+  const submitHandler = async (e) => {
     e.preventDefault(); //To stop the output of the browser
-    setUserData({
+    const captain = {
       email: email,
       password: password
-    })
+    }
+
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/login`, CaptainLogin)
+    if (response.status === 200) {
+      const data = response.data
+      setCaptain(data.captain)
+      localStorage.setItem("token", token)
+      navigate('/captain-home')
+    }
+
     setEmail('')
     setPassword('')
   }
+
   return (
     <div>
       <div className='p-7 h-screen flex flex-col justify-between'>
         <div>
           {/* uber logo */}
-          <img className='w-30 mb-10' src="https://static.vecteezy.com/system/resources/previews/027/127/451/large_2x/uber-logo-uber-icon-transparent-free-png.png" alt="" style={{ filter: 'brightness(0) invert(1)' }}/>
+          <img className='w-30 mb-10' src="https://static.vecteezy.com/system/resources/previews/027/127/451/large_2x/uber-logo-uber-icon-transparent-free-png.png" alt="" style={{ filter: 'brightness(0) invert(1)' }} />
 
           {/* Form  */}
           <form onSubmit={(e) => {
             submitHandler(e);
           }}>
-
 
             <h2 className='text-3xl underline font-semibold mb-7 text-center '>Captain Login</h2>
             {/* email box */}
