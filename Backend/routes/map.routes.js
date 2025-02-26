@@ -15,6 +15,6 @@ router.post('/get-distance-time',
     query('origin').isString().isLength({min: 3}),
     query('destination').isLength({min:3}).isString(),
     authMiddleware.authUser,
-    mapController.getCoordinates
+    mapController.getDistanceTimes
 
 )

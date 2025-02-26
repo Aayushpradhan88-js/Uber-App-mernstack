@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const getAddressCoordinates = async (address) => {
+module.exports.getAddressCoordinates = async (address) => {
 
   const apiKey = process.env.GOOGLE_MAPS_API
   const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
@@ -35,9 +35,10 @@ module.exports.getDistanceTime = async (origin, destination) => {
       throw new Error('No routes Found');
     }
 
+    return response.data.rows[0].element[0];
+
   } catch (error) {
+    throw new Error('Coordinates not found');
 
   }
-
 }
-module.exports = { getAddressCoordinates };

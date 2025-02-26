@@ -1,8 +1,9 @@
 const mapService = require('../services/map.service');
 const { validationResult } = require('express-validator');
 
-module.exports.getCoordinates = async () => {
-    
+//getCoordinates
+module.exports.getCoordinates = async (req, res) => {
+
     const error = validationResult(req);
     if (!error.isEmpty()) {
         return res.status(400).json({
@@ -17,5 +18,28 @@ module.exports.getCoordinates = async () => {
         res.status(200).json({ coordinates });
     } catch (error) {
         res.status(400).json({ message: 'Coordinates not found' });
+    }
+}
+
+//getDistanceTime
+module.exports.getDistanceTimes = async (req, res) => {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({
+            errors: errors.array()
+        })
+    };
+
+    try {
+        const { origin, destination } = req.query;
+        const coordinates = await mapService.getDistanceTime(origin, destination);
+        if (!coordinates) {
+            throw new Error('No routes Found !!');
+        }
+
+        return res.status(200).json({ coordinates })
+    } catch (error) {
+        res.status(400).json({ messages: 'Origin and destination error' });
     }
 }
