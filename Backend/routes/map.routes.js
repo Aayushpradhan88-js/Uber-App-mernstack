@@ -6,7 +6,15 @@ const {query} = require('express-validator');
 const { getCoordinates } = require('../services/maps.service');
 
 router.post('/get-coordinates', 
-    authMiddleware.authUser,
     query('address').isString().isLength({min: 3}),
-    getCoordinates
+    authMiddleware.authUser,
+    mapController.getCoordinates
+)
+
+router.post('/get-distance-time',
+    query('origin').isString().isLength({min: 3}),
+    query('destination').isLength({min:3}).isString(),
+    authMiddleware.authUser,
+    mapController.getCoordinates
+
 )
