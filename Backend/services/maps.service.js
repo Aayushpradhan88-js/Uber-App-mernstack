@@ -42,3 +42,22 @@ module.exports.getDistanceTime = async (origin, destination) => {
 
   }
 }
+
+//AutoSuggestion Feature
+module.exports.getAutoCompeteSuggestion = async(input) => {
+  if(!input) {
+    res.status(400).json({message:'input is required'});
+  };
+
+  const apiKey = Google_Maps_API;
+  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin}&destinations=${destination}&key=${apiKey}`;
+
+  try {
+    const response = await axios.get(url);
+    if(response.data.status === 'OK'){
+      return response.data.predictions;
+    }
+  } catch (error) {
+    throw new Error('Unable to fetch Data')    
+  }
+}
