@@ -43,7 +43,7 @@ async function getFare(pickup, destination) {
 }
 
 
-module.code.createRide = async ({
+module.exports.createRide = async ({
     user, destination, pickup, vechileType
 }) => {
 
