@@ -13,10 +13,14 @@ module.exports.createRide = async (req, res) => {
 
     try {
         const rider = await rideService.createRide({
-            user: userId,
+            user: req.user._id,
             vechileType,
             pickup,
             destination
+        })
+
+        res.status(200).json({
+            rider
         })
     } catch (error) {
         return res.status(400).json({
