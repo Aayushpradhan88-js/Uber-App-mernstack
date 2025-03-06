@@ -14,19 +14,19 @@ async function getFare(pickup, destination) {
         auto: 30,
         car: 50,
         motorCycle: 20,
-    }
+    };
 
     const perKmRate = {
         auto: 10,
         car: 15,
         motorCycle: 8,
-    }
+    };
 
     const perMinuteRatio = {
         auto: 2,
         car: 3,
         motorCycle: 1.5,
-    }
+    };
 
     const fare = {
         //auto
@@ -37,19 +37,19 @@ async function getFare(pickup, destination) {
 
         //motorcycle
         motorCycle: Math.round((baseFare.motorCycle + ((distanceTime.distance.value / 1000) * perKmRate.motorCycle) + ((distanceTime.duration.value / 60) * perMinuteRatio.motorCycle))),
-    }
+    };
 
     return fare;
-}
+};
 
 //otp generation for rider
 function getOTP(num) {
     function generateOPT() {
         const otp = crypto.randomInt(Math.pow((10, 10-num), Math.pow(10, num))).toString();
         return opt;
-    }
+    };
     return generateOPT(num);
-}
+};
 
 module.exports.createRide = async ({
     user, destination, pickup, vechileType
@@ -67,7 +67,7 @@ module.exports.createRide = async ({
         pickup,
         otp: getOTP(6),
         fare: fare[vechileType]
-    })
+    });
 
     return rides;
-}
+};

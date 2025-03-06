@@ -9,7 +9,7 @@ router.post('/get-coordinates',
     query('address').isString().isLength({ min: 3 }),
     authMiddleware.authUser,
     mapController.getCoordinates
-)
+);
 
 router.post('/get-distance-time',
     query('origin').isString().isLength({ min: 3 }),
@@ -17,13 +17,13 @@ router.post('/get-distance-time',
     authMiddleware.authUser,
     mapController.getDistanceTimes
 
-)
+);
 
 //AutoSuggestion Feature
 router.post('/get-suggestion',
     query('input').isString().isLength({ min: 3 }),
     authMiddleware.authUser,
     mapController.getAutoSuggestion
-)
+);
 
 module.exports = router;

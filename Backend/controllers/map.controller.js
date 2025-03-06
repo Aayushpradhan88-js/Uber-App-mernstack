@@ -8,8 +8,8 @@ module.exports.getCoordinates = async (req, res) => {
     if (!error.isEmpty()) {
         return res.status(400).json({
             error: error.array()
-        })
-    }
+        });
+    };
 
     const { address } = req.query;
 
@@ -18,8 +18,8 @@ module.exports.getCoordinates = async (req, res) => {
         res.status(200).json({ coordinates });
     } catch (error) {
         res.status(400).json({ message: 'Coordinates not found' });
-    }
-}
+    };
+};;
 
 //getDistanceTime
 module.exports.getDistanceTimes = async (req, res) => {
@@ -28,7 +28,7 @@ module.exports.getDistanceTimes = async (req, res) => {
     if (!errors.isEmpty()) {
         res.status(400).json({
             errors: errors.array()
-        })
+        });
     };
 
     try {
@@ -36,13 +36,13 @@ module.exports.getDistanceTimes = async (req, res) => {
         const coordinates = await mapService.getDistanceTime(origin, destination);
         if (!coordinates) {
             throw new Error('No routes Found !!');
-        }
+        };
 
-        return res.status(200).json({ coordinates })
+        return res.status(200).json({ coordinates });
     } catch (error) {
         res.status(400).json({ messages: 'Origin and destination error' });
-    }
-}
+    };
+};
 
 //AutoSuggestion Feature
 module.exports.getAutoSuggestion = (req, res) => {
@@ -55,9 +55,9 @@ module.exports.getAutoSuggestion = (req, res) => {
         const { input } = req.query;
         const suggestions = mapService.getAutoCompleteSuggestion(input);
 
-        return res.status(200).json( suggestions );
-        
+        return res.status(200).json(suggestions);
+
     } catch (error) {
         res.status(400).json({ messages: 'input error' });
-    }
-}
+    };
+};

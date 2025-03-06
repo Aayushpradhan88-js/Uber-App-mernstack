@@ -2,7 +2,7 @@ const axios = require('axios');
 
 module.exports.getAddressCoordinates = async (address) => {
 
-  const apiKey = process.env.GOOGLE_MAPS_API
+  const apiKey = process.env.GOOGLE_MAPS_API;
   const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
 
   try {
@@ -17,7 +17,7 @@ module.exports.getAddressCoordinates = async (address) => {
   } catch (error) {
     console.error(error);
     throw error;
-  }
+  };
 };
 
 //get-distance-time
@@ -41,7 +41,7 @@ module.exports.getDistanceTime = async (origin, destination) => {
     throw new Error('Coordinates not found');
 
   }
-}
+};
 
 //AutoSuggestion Feature
 module.exports.getAutoCompeteSuggestion = async(input) => {
@@ -60,4 +60,4 @@ module.exports.getAutoCompeteSuggestion = async(input) => {
   } catch (error) {
     throw new Error('Unable to fetch Data')    
   }
-}
+};

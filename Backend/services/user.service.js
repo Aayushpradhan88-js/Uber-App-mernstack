@@ -5,7 +5,7 @@ module.exports.createUserService = async ({
 }) => {
     if (!firstname || !email || !password) {
         throw new Error("Invalid credentails")
-    }
+    };
 
     //creating user
     const user = await userModel.create({
@@ -15,9 +15,9 @@ module.exports.createUserService = async ({
         },
         email,
         password
-    })
+    });
 
-    return user //returning the user
-}
+    return user; //returning the user
+};
 
 //this particular code is use to create a user.
