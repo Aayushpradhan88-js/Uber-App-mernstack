@@ -21,7 +21,7 @@ const CaptainSignup = () => {
 
   const [captain, setCaptain] = useContext(CaptainDataContext);
 
-  const submitHandler = async(e) => {
+  const submitHandler = async (e) => {
     e.preventDefault(); //To stop the output of the browser
     const captainData = ({
       fullname: {
@@ -39,7 +39,7 @@ const CaptainSignup = () => {
     })
 
     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/register`, captainData)
-    if(response.status === 200){
+    if (response.status === 200) {
       const data = response.data
       setCaptain(data.captain);
       localStorage.setItem('token', token)

@@ -8,10 +8,7 @@ import axios from 'axios';
 import { CaptainDataContext } from '../context/CaptainContext';
 import CaptainDetails from '../components/CaptainDetail';
 import RidePopUp from '../components/ConfirmRidePopup';
-import ConfirmRidePopup from '../components/ConfirmRidePopup';
-
-
-
+import ConfirmRidePopup from '../components/ConfirmRidePopup'; 
 
 const CaptainHome = () => {
   const [ridePopupPanel, setRidePopupPanel] = useState(false);
@@ -36,6 +33,17 @@ const CaptainHome = () => {
     setConfirmRidePopupPanel(true)
   }
 
+  useGSAP(function (){
+    if(confirmRidePopupPanel){
+      gsap.to(confirmRidePopupPanelRef.current,{
+        transform: 'translateY(0)'
+      })
+    } else {
+      gsap.to(confirmRidePopupPanelRef.current,{
+        transform: 'translateY(100%)'
+      })
+    }
+  }, [confirmRidePopupPanel]);
 
   return (
     <div className='h-screen'>

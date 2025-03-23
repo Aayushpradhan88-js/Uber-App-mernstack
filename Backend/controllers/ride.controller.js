@@ -17,14 +17,16 @@ module.exports.createRide = async (req, res) => {
             vechileType,
             pickup,
             destination
-        })
+        });
 
         res.status(200).json({
             rider
-        })
+        });
     } catch (error) {
         return res.status(400).json({
             message: error,
         });
     };
-}
+};
+
+module.exports.getFare = async (req,res) => {}

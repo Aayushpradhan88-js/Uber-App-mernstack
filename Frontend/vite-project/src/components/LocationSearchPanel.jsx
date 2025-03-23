@@ -1,4 +1,4 @@
-const LocationSearchPanel = () => {
+ const LocationSearchPanel = () => {
   return (
     <div>
         <div className="flex gap-4 items-center my-4 justify-start">

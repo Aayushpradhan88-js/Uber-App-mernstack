@@ -42,6 +42,8 @@ async function getFare(pickup, destination) {
     return fare;
 };
 
+module.exports.getFare = getFare;
+
 //otp generation for rider
 function getOTP(num) {
     function generateOPT() {

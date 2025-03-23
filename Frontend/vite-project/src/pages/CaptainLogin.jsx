@@ -18,19 +18,19 @@ const CaptainLogin = () => {
     const captain = {
       email: email,
       password: password
-    }
+    };
 
     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/login`, CaptainLogin)
     if (response.status === 200) {
-      const data = response.data
-      setCaptain(data.captain)
-      localStorage.setItem("token", token)
-      navigate('/captain-home')
-    }
+      const data = response.data;
+      setCaptain(data.captain);
+      localStorage.setItem("token", data.token);
+      navigate('/captain-home');
+    };
 
-    setEmail('')
-    setPassword('')
-  }
+    setEmail('');
+    setPassword('');
+  };
 
   return (
     <div>
@@ -101,7 +101,7 @@ const CaptainLogin = () => {
       </div>
 
     </div>
-  )
-}
+  );
+};
 
-export default CaptainLogin
+export default CaptainLogin;
